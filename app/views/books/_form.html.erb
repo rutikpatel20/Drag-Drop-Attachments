@@ -11,22 +11,23 @@
         <% end %>
       <% end %>
       <!-- Form Started Here -->
-      <%= form_with model: @book do |f| %>
+      <%= form_with model: @book do |form| %>
         <br>
-        <%= f.label :name, "Book Name :", class:"mt-3" %>
-        <%= f.text_field :name, placeholder: "Enter Book Name Here", class:"mb-2 form-control" %>
+        <%= form.label :name, "Book Name :", class:"mt-3" %>
+        <%= form.text_field :name, placeholder: "Enter Book Name Here", class:"mb-2 form-control" %>
         <br>
-        <%= f.label :author, "Author :" %>
-        <%= f.text_field :author, placeholder: "Enter Author Name Here", class:"mb-2 form-control" %>
+        <%= form.label :author, "Author :" %>
+        <%= form.text_field :author, placeholder: "Enter Author Name Here", class:"mb-2 form-control" %>
         <br>
-        <%= f.label :price, "Price :" %>
-        <%= f.number_field :price, placeholder: "Enter Book Price Here", class:"mb-2 form-control" %>
+        <%= form.label :price, "Price :" %>
+        <%= form.number_field :price, placeholder: "Enter Book Price Here", class:"mb-2 form-control" %>
         <br>
-        <%= f.label :cover_page, "Cover Page :" %>
-        <%= f.file_field :cover_page, class:"mb-2 form-control" %>
+        <%= form.label :cover_page, "Cover Page :" %>
+        <%= form.file_field :cover_page, class:"mb-2 form-control" %>
         <br>
+        <%= render 'books/image_form', form: form %>
         <div class="d-flex justify-content-center">
-          <%= f.submit "Save Book", class:"btn-secondary border-0 shadow py-2 px-5" %>
+          <%= form.submit "Save Book", class:"btn-secondary border-0 shadow py-2 px-5" %>
         </div>
       <% end %>
     </div>
