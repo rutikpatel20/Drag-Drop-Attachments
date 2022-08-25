@@ -23,7 +23,9 @@
           </thead>
           <% @books.each do |book| %>
             <tr>
-              <td class="text-center"> <%= image_tag book.cover_page %>  </td>
+              <% book.color_pages.each do |img| %>
+                <td class="text-center"> <%= image_tag img %>  </td>
+              <% end %>
               <td class="text-center"> <%= link_to book.name, book_path(book) %> </td>
               <td class="text-center"> <%= book.author %> </td>
               <td class="text-center"> <%= book.price %> </td>
