@@ -23,9 +23,11 @@
           </thead>
           <% @books.each do |book| %>
             <tr>
-              <% book.color_pages.each do |img| %>
-                <td class="text-center"> <%= image_tag img %>  </td>
-              <% end %>
+              <td class="text-center">
+                <% book.color_pages.each do |img| %>
+                  <%= image_tag img %>
+                <% end %>
+              </td>
               <td class="text-center"> <%= link_to book.name, book_path(book) %> </td>
               <td class="text-center"> <%= book.author %> </td>
               <td class="text-center"> <%= book.price %> </td>
