@@ -23,9 +23,19 @@
           </thead>
           <% @books.each do |book| %>
             <tr>
+              <!---- To show file according its content type --->
               <td class="text-center">
                 <% book.color_pages.each do |img| %>
-                  <%= link_to image_tag(img), img  %>
+                  <%= link_to img  do%>
+                    <% if img.content_type == "image/jpeg" || img.content_type == "image/png" %>
+                      <i class="fas fa-file-image text-decoration-none text-dark me-3" style="font-size: 28px;"></i>
+                    <% elsif img.content_type == "application/pdf" %>
+                      <i class="fas fa-file-pdf text-decoration-none text-dark me-3" style="font-size: 28px;"></i>
+                    <% else %>
+                      <i class="fas fa-file-alt text-decoration-none text-dark me-3" style="font-size: 28px;"></i>
+                    <% end %>
+                  <% end %>
+                  <p><%= img.content_type %></p>
                 <% end %>
               </td>
               <td class="text-center"> <%= link_to book.name, book_path(book) %> </td>
