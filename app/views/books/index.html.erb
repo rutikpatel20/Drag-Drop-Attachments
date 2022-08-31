@@ -25,7 +25,9 @@
             <tr>
               <td class="text-center">
                 <% book.color_pages.each do |img| %>
-                  <%= image_tag img %>
+                  <%#= image_tag img %>
+                  <%#= link_to img.filename, rails_blob_path(img), class:"text-dark text-decoration-none" %>
+                  <%= link_to image_tag(img), img  %>
                 <% end %>
               </td>
               <td class="text-center"> <%= link_to book.name, book_path(book) %> </td>

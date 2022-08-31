@@ -21,13 +21,17 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book = Book.find(params[:id])
   end
 
   def edit
+    @book = Book.find(params[:id])
   end
 
   def update
-    if @book.update(book_params)
+    @book = Book.find(params[:id])
+    @book.color_pages.attach(params[:book][:color_pages])
+    if @book.update(book_params_without_image)
       flash[:errors] = "Book has been Updated Successfully"
       redirect_to book_path(@book)
     else
@@ -37,8 +41,14 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book.destroy
-    redirect_to books_path, notice: "Book has been successfully destroyed."
+    @book = Book.find(params[:id])
+    if @book.delete
+      flash[:errors] = "Book Deleted Successfully"
+      redirect_to root_path(@book)
+    else
+      flash[:errors] = @book.errors.full_messages
+      redirect_to destroy_book_path
+    end
   end
 
   private
@@ -47,7 +57,11 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def book_params_without_image
+    params.require(:book).permit(:name, :author, :price, :cover_page)
+  end
+
   def book_params
-    params.require(:book).permit(:name, :author, :price, color_pages: [])
+    params.require(:book).permit(:name, :author, :price, :cover_page, color_pages: [])
   end
 end
