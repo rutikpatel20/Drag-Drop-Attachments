@@ -51,6 +51,12 @@ class BooksController < ApplicationController
     end
   end
 
+  def delete_file
+    file = ActiveStorage::Attachment.find(params[:id])
+    file.purge
+    redirect_back(fallback_location: books_path)
+  end
+
   private
 
   def set_book

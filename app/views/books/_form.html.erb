@@ -31,5 +31,37 @@
         </div>
       <% end %>
     </div>
+    <table class="table table-secondary table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td> Color Images </td>
+          <td> Action </td>
+        </thead>
+        <% @book.color_pages.each do |color_page| %>
+          <tr>
+            <td>
+              <%= image_tag color_page, alt: "Image not loaded", style:"height: 100px;" %>
+              <%= link_to color_page.filename, rails_blob_path(color_page, disposition: :attachment), class:"text-dark text-decoration-none" %>
+            </td>
+            <td>
+              <%= link_to 'Remove', delete_file_book_url(color_page.id),  data: { turbo_method: :delete }, class: "text-danger text-decoration-none" %>
+            </td>
+          </tr>
+        <% end %>
+        <thead class="table-secondary">
+          <td> Cover Page </td>
+          <td> Action </td>
+        </thead>
+        <tr>
+          <td>
+            <%= image_tag @book.cover_page, alt: "Image not loaded", style:"height: 100px;" %>
+            <%= link_to @book.cover_page.filename, rails_blob_path(@book.cover_page, disposition: :attachment), class:"text-dark text-decoration-none" %>
+          </td>
+          <td>
+            <%= link_to 'Remove', delete_file_book_url(@book.cover_page.id),  data: { turbo_method: :delete }, class: "text-danger text-decoration-none" %>
+          </td>
+        </tr>
+      </ol>
+    </table>
   </div>
 </div>
